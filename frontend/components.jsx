@@ -76,13 +76,13 @@ function StatCard({ label, value, delta, trend, icon, tone='default', hint }){
   return (
     <Card className="relative overflow-hidden">
       <div className="flex items-start justify-between gap-3">
-        <div>
-          <div className="text-[11px] uppercase tracking-wider font-medium text-slate-500">{label}</div>
-          <div className={`mt-1.5 text-[26px] font-semibold leading-none tabular ${tones[tone]}`}>{value}</div>
-          {hint && <div className="mt-1.5 text-xs text-slate-500">{hint}</div>}
+        <div className="min-w-0 flex-1">
+          <div className="text-[11px] uppercase tracking-wider font-medium text-slate-500 truncate">{label}</div>
+          <div className={`mt-1.5 text-[24px] sm:text-[26px] font-semibold leading-none tabular truncate ${tones[tone]}`}>{value}</div>
+          {hint && <div className="mt-1.5 text-xs text-slate-500 truncate">{hint}</div>}
         </div>
         {icon && (
-          <div className={`w-9 h-9 rounded-lg flex items-center justify-center ${tone==='critical'?'bg-red-50 text-red-600':tone==='high'?'bg-orange-50 text-orange-600':tone==='medium'?'bg-amber-50 text-amber-600':tone==='good'?'bg-emerald-50 text-emerald-600':'bg-brand-500/10 text-brand-500'}`}>
+          <div className={`shrink-0 w-9 h-9 rounded-lg flex items-center justify-center ${tone==='critical'?'bg-red-50 text-red-600':tone==='high'?'bg-orange-50 text-orange-600':tone==='medium'?'bg-amber-50 text-amber-600':tone==='good'?'bg-emerald-50 text-emerald-600':'bg-brand-500/10 text-brand-500'}`}>
             <Icon name={icon} size={18}/>
           </div>
         )}

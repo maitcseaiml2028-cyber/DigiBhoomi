@@ -564,9 +564,9 @@ function LandingHero() {
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1a6349" strokeWidth="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
                 </div>
               </div>
-              <div style={{display:'flex',height:320}}>
+              <div style={{display:'flex',height:320,width:'100%'}}>
                 {/* Sidebar */}
-                <div style={{width:130,background:'#0d3b2e',flexShrink:0,padding:'8px 0'}}>
+                <div className="hidden sm:block" style={{width:130,background:'#0d3b2e',flexShrink:0,padding:'8px 0'}}>
                   <div style={{padding:'6px 10px',marginBottom:6}}>
                     <div style={{fontSize:9,color:'rgba(255,255,255,.4)',letterSpacing:'1px',textTransform:'uppercase',marginBottom:6}}>Menu</div>
                   </div>
@@ -588,7 +588,7 @@ function LandingHero() {
                   ))}
                 </div>
                 {/* Main area */}
-                <div style={{flex:1,overflow:'hidden',padding:'12px'}}>
+                <div style={{flex:1,overflow:'hidden',padding:'12px',minWidth:0}}>
                   {/* Mini stats row */}
                   <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:6,marginBottom:10}}>
                     {[
@@ -770,7 +770,7 @@ function LandingLifecycle() {
         </div>
 
         {/* Horizontal stepper */}
-        <div className="lp-fade-up lp-delay-2 lp-scroll-x" style={{paddingBottom:8}}>
+        <div className="lp-fade-up lp-delay-2 lp-scroll-x" style={{paddingBottom:8,width:'100%'}}>
           <div style={{display:'flex',alignItems:'flex-start',gap:0,minWidth:'max-content',margin:'0 auto',justifyContent:'center'}}>
             {steps.map((s,i)=>(
               <React.Fragment key={i}>
@@ -818,7 +818,7 @@ function DashboardPreview() {
   const timelineStages = ['Proposal','Mapping','Verification','Acquisition','Possession'];
 
   return (
-    <div className="lp-dash" style={{border:'1px solid #e2e8f0',borderRadius:16,overflow:'hidden',boxShadow:'0 20px 64px rgba(0,0,0,.12)'}}>
+    <div className="lp-dash" style={{border:'1px solid #e2e8f0',borderRadius:16,overflow:'hidden',boxShadow:'0 20px 64px rgba(0,0,0,.12)',width:'100%',maxWidth:'100%'}}>
       {/* Topbar */}
       <div style={{display:'flex',alignItems:'center',gap:12,padding:'10px 16px',background:'#fff',borderBottom:'1px solid #f1f5f9'}}>
         <div style={{width:28,height:28,borderRadius:7,background:'linear-gradient(135deg,#1a6349,#0d3b2e)',display:'flex',alignItems:'center',justifyContent:'center'}}>
@@ -842,9 +842,9 @@ function DashboardPreview() {
         </div>
       </div>
 
-      <div style={{display:'flex',height:520}}>
+      <div style={{display:'flex',height:520,width:'100%'}}>
         {/* Sidebar */}
-        <div style={{width:150,background:'#0d3b2e',flexShrink:0,overflowY:'auto',padding:'12px 0'}}>
+        <div className="hidden sm:block" style={{width:150,background:'#0d3b2e',flexShrink:0,overflowY:'auto',padding:'12px 0'}}>
           {[
             ['layout-dashboard','Overview',true],
             ['folder-open','Projects',false],
@@ -873,9 +873,9 @@ function DashboardPreview() {
         </div>
 
         {/* Main panel */}
-        <div style={{flex:1,overflow:'auto',padding:'16px',background:'#f8fafc'}}>
+        <div style={{flex:1,overflow:'auto',padding:'16px',background:'#f8fafc',minWidth:0}}>
           {/* KPI row */}
-          <div style={{display:'grid',gridTemplateColumns:'repeat(5,1fr)',gap:10,marginBottom:14}}>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-4">
             {[
               {l:'Total Projects',v:'142',c:'#0d3b2e',ic:'layers',bg:'#e8f5e9',bc:'#bbf7d0'},
               {l:'Land Parcels',v:'1.9M',c:'#1a6349',ic:'map-pin',bg:'#e8f5e9',bc:'#bbf7d0'},
@@ -896,7 +896,7 @@ function DashboardPreview() {
           </div>
 
           {/* Map + detail side-by-side */}
-          <div style={{display:'grid',gridTemplateColumns:'1.6fr 1fr',gap:12,marginBottom:14}}>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-4">
             {/* Map */}
             <div style={{background:'#fff',borderRadius:10,overflow:'hidden',border:'1px solid #e2e8f0',boxShadow:'0 1px 4px rgba(0,0,0,.05)',height:220}}>
               <div style={{padding:'8px 12px',borderBottom:'1px solid #f1f5f9',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
@@ -1222,9 +1222,9 @@ function LandingFooter() {
   return (
     <footer className="lp-footer" style={{padding:'52px 0 24px'}}>
       <div style={{maxWidth:1180,margin:'0 auto',padding:'0 24px'}}>
-        <div style={{display:'grid',gridTemplateColumns:'2fr 1fr 1fr 1fr',gap:40,marginBottom:40}}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-10">
           {/* Brand */}
-          <div>
+          <div className="lg:col-span-2">
             <div style={{display:'flex',alignItems:'center',gap:9,marginBottom:14,cursor:'pointer'}} onClick={()=>nav('/')}>
               <div style={{width:32,height:32,borderRadius:8,background:'linear-gradient(135deg,#1a6349,#0d3b2e)',display:'flex',alignItems:'center',justifyContent:'center',boxShadow:'0 2px 8px rgba(26,99,73,.4)'}}>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="rgba(255,255,255,.2)"/><path d="M12 4c-1.5 2.5-3 5-3 8h6c0-3-1.5-5.5-3-8z" fill="#4ade80"/><path d="M9 12c0 2.5 1 5 3 6 2-1 3-3.5 3-6H9z" fill="#86efac"/></svg>
