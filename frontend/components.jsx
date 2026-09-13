@@ -124,7 +124,7 @@ function getNavForRole() {
   ];
 }
 
-function Sidebar(){
+function Sidebar({ mobileOpen, setMobileOpen }){
   const [collapsed, setCollapsed] = useState(() => localStorage.getItem('bs.sidebar') === '1');
   useEffect(()=>{ localStorage.setItem('bs.sidebar', collapsed?'1':'0'); }, [collapsed]);
   useLucide();
@@ -138,7 +138,12 @@ function Sidebar(){
   };
 
   return (
-    <aside className={`bg-navy-900 text-slate-800 h-screen self-start sticky top-0 flex flex-col overflow-hidden transition-all duration-200 border-r border-navy-700 ${collapsed?'w-[68px]':'w-[248px]'}`}>
+    <>
+    {/* Mobile backdrop */}
+    {mobileOpen && <div className="fixed inset-0 z-40 bg-slate-800/50 md:hidden" onClick={() => setMobileOpen?.(false)} />}
+    <aside className={`bg-navy-900 text-slate-800 h-screen flex flex-col overflow-hidden transition-all duration-200 border-r border-navy-700
+      fixed md:static top-0 left-0 z-50 transform ${mobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'} 
+      ${collapsed?'w-[68px]':'w-[248px]'}`}>
       <div className="h-16 shrink-0 px-4 flex items-center gap-3 border-b border-navy-700">
         <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center shadow-lg shadow-brand-500/30">
           <Icon name="mountain-snow" size={20} className="text-white"/>
@@ -161,6 +166,7 @@ function Sidebar(){
                 const isActive = currentPath === it.to || (it.to !== '/' && currentPath.startsWith(it.to) && it.to.split('/').length > 2); // Simple active logic
                 return (
                   <NavLink key={it.label} to={it.to}
+                    onClick={() => setMobileOpen?.(false)}
                     className={`group flex items-center gap-3 rounded-lg px-3 py-2 text-[13px] font-medium transition-colors ${isActive ? 'bg-brand-500/15 text-brand-600 ring-1 ring-brand-500/30' : 'text-slate-600 hover:bg-navy-700/60 hover:text-slate-900'}`}>
                     <Icon name={it.icon} size={16} className={`shrink-0`} />
                     {!collapsed && <span className="flex-1 truncate">{it.label}</span>}
@@ -190,7 +196,7 @@ function Sidebar(){
               </div>
               <button onClick={()=>setCollapsed(true)}
                 title="Collapse sidebar"
-                className="w-7 h-7 rounded-md hover:bg-navy-700 flex items-center justify-center text-slate-500 hover:text-slate-900 shrink-0">
+                className="w-7 h-7 rounded-md hover:bg-navy-700 hidden md:flex items-center justify-center text-slate-500 hover:text-slate-900 shrink-0">
                 <Icon name="chevrons-left" size={14}/>
               </button>
             </div>
@@ -213,7 +219,7 @@ function Sidebar(){
           <div className="flex flex-col items-center gap-1.5">
             <button onClick={()=>setCollapsed(false)}
               title="Expand sidebar"
-              className="w-9 h-9 rounded-lg bg-navy-800/60 hover:bg-navy-700 flex items-center justify-center text-slate-500 hover:text-slate-900">
+              className="w-9 h-9 rounded-lg bg-navy-800/60 hover:bg-navy-700 hidden md:flex items-center justify-center text-slate-500 hover:text-slate-900">
               <Icon name="chevrons-right" size={16}/>
             </button>
             <button
@@ -230,16 +236,20 @@ function Sidebar(){
         )}
       </div>
     </aside>
+    </>
   );
 }
 
 // ---------- Topbar ----------
-function Topbar({ crumbs=[], right=null }){
+function Topbar({ crumbs=[], right=null, setMobileOpen }){
   const nav = useNavigate();
   useLucide();
   return (
-    <div className="h-16 shrink-0 bg-white/85 backdrop-blur border-b hairline flex items-center px-6 gap-4 sticky top-0 z-30">
-      <div className="flex items-center gap-2 text-sm">
+    <div className="h-16 shrink-0 bg-white/85 backdrop-blur border-b hairline flex items-center px-4 md:px-6 gap-3 md:gap-4 sticky top-0 z-30">
+      <button onClick={() => setMobileOpen?.(true)} className="md:hidden w-9 h-9 rounded-lg hover:bg-slate-100 flex items-center justify-center text-slate-600">
+        <Icon name="menu" size={20}/>
+      </button>
+      <div className="flex items-center gap-2 text-sm hidden sm:flex">
         {crumbs.map((c,i)=>(
           <React.Fragment key={i}>
             {i>0 && <Icon name="chevron-right" size={14} className="text-slate-400"/>}
@@ -247,8 +257,12 @@ function Topbar({ crumbs=[], right=null }){
           </React.Fragment>
         ))}
       </div>
+      {/* Mobile abbreviated crumbs */}
+      <div className="flex items-center sm:hidden text-sm font-medium text-slate-900">
+        {crumbs[crumbs.length - 1]?.label || 'DigiBhoomi'}
+      </div>
       <div className="flex-1"/>
-      <div className="relative">
+      <div className="relative hidden md:block">
         <Icon name="search" size={14} className="absolute left-3 top-2.5 text-slate-400"/>
         <input placeholder="Search projects, parcels, officers…"
           onKeyDown={e=>{ if(e.key==='Enter' && e.currentTarget.value){ nav('/projects?q='+encodeURIComponent(e.currentTarget.value)); }}}
@@ -258,10 +272,10 @@ function Topbar({ crumbs=[], right=null }){
         <Icon name="bell" size={16}/>
         <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-red-500 pulse-ring"/>
       </button>
-      <button className="w-9 h-9 rounded-lg bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600">
+      <button className="hidden sm:flex w-9 h-9 rounded-lg bg-slate-100 hover:bg-slate-200 items-center justify-center text-slate-600">
         <Icon name="help-circle" size={16}/>
       </button>
-      <div className="h-8 w-px bg-slate-200"/>
+      <div className="hidden sm:block h-8 w-px bg-slate-200"/>
       <div className="flex items-center gap-2.5">
         <div className="w-9 h-9 rounded-full bg-gradient-to-br from-brand-500 to-amber-500 flex items-center justify-center text-white text-xs font-semibold">
           {(window.BS_STATE.user?.name || 'AV').split(' ').map(s=>s[0]).join('').slice(0,2)}
@@ -281,12 +295,13 @@ function Topbar({ crumbs=[], right=null }){
 
 // ---------- Layout ----------
 function AppLayout({ crumbs, right, children }){
+  const [mobileOpen, setMobileOpen] = useState(false);
   return (
     <div className="flex h-screen min-h-0 overflow-hidden">
-      <Sidebar/>
+      <Sidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
       <div className="flex-1 flex flex-col min-w-0 min-h-0">
-        <Topbar crumbs={crumbs} right={right}/>
-        <main className="flex-1 min-w-0 min-h-0 overflow-auto px-6 py-6 fade-up">{children}</main>
+        <Topbar crumbs={crumbs} right={right} setMobileOpen={setMobileOpen} />
+        <main className="flex-1 min-w-0 min-h-0 overflow-auto px-4 md:px-6 py-4 md:py-6 fade-up">{children}</main>
       </div>
       <ToastHost/>
     </div>

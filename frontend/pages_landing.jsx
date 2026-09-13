@@ -386,7 +386,7 @@ function LandingNav() {
           <span style={{fontWeight:800,fontSize:17,color:'#0d3b2e',letterSpacing:'-.3px'}}>DigiBhoomi</span>
         </div>
 
-        <nav style={{display:'flex',alignItems:'center',gap:32}}>
+        <nav className="hidden md:flex items-center gap-8">
           {[['#hero','Home'],['#challenge','About'],['#features','Features'],['#lifecycle','How It Works']].map(([href,label])=>(
             <a key={href} href={href} className="lp-nav-link" onClick={(e) => {
               e.preventDefault();
@@ -498,7 +498,7 @@ function LandingHero() {
       </div>
 
       <div style={{maxWidth:1180,margin:'0 auto',padding:'48px 24px',position:'relative',zIndex:1,width:'100%'}}>
-        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:48,alignItems:'center'}}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
           {/* LEFT */}
           <div>
@@ -530,7 +530,7 @@ function LandingHero() {
             </div>
 
             {/* Stats */}
-            <div className="lp-fade-up lp-delay-4" style={{display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:12}}>
+            <div className="lp-fade-up lp-delay-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
               {stats.map((s,i)=>(
                 <div key={i} style={{display:'flex',alignItems:'center',gap:10,padding:'10px 14px',background:'rgba(255,255,255,.85)',borderRadius:10,border:'1px solid rgba(0,0,0,.07)',backdropFilter:'blur(8px)'}}>
                   <div style={{width:34,height:34,borderRadius:8,background:'#e8f5e9',border:'1px solid #c8e6c9',display:'flex',alignItems:'center',justifyContent:'center'}}>
@@ -620,7 +620,7 @@ function LandingHero() {
                     </div>
                   </div>
                   {/* Bottom row: project detail + alerts */}
-                  <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:6}}>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
                     <div style={{background:'#f8fafc',borderRadius:7,padding:'8px',border:'1px solid #e2e8f0'}}>
                       <div style={{fontWeight:700,fontSize:9,color:'#0d3b2e',marginBottom:4}}>Delhi–Mumbai Expressway</div>
                       <div style={{display:'flex',justifyContent:'space-between',marginBottom:3}}>
@@ -651,7 +651,7 @@ function LandingHero() {
                 </div>
               </div>
               {/* Stats row bottom */}
-              <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',borderTop:'1px solid #f1f5f9',padding:'10px 14px',gap:10,background:'#fafafa'}}>
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 border-t border-slate-100 p-3 bg-slate-50">
                 {[
                   {v:'142',l:'Total Projects',c:'#0d3b2e'},
                   {v:'68%',l:'Acquisition Progress',c:'#25a06e'},
@@ -711,7 +711,7 @@ function LandingChallenge() {
   return (
     <section id="challenge" style={{background:'#fff',padding:'80px 0'}}>
       <div style={{maxWidth:1180,margin:'0 auto',padding:'0 24px'}}>
-        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:60,alignItems:'center',marginBottom:52}}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center mb-12">
           <div className="lp-fade-left">
             <div className="lp-pill" style={{marginBottom:16}}>
               <Icon name="alert-circle" size={11} style={{color:'#1a6349'}}/>
@@ -730,7 +730,7 @@ function LandingChallenge() {
           </div>
         </div>
 
-        <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:20}}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {cards.map((c,i)=>(
             <div key={i} className={`lp-card lp-card-green lp-fade-up lp-delay-${i+1}`} style={{padding:'24px 20px'}}>
               <div className="lp-feat-icon" style={{width:42,height:42,borderRadius:10,background:'#f0fdf4',border:'1px solid #d1fae5',display:'flex',alignItems:'center',justifyContent:'center',marginBottom:14}}>
@@ -949,7 +949,7 @@ function DashboardPreview() {
           </div>
 
           {/* Bottom charts row */}
-          <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:10}}>
+          <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-8">
             {/* Acquisition Progress */}
             <div style={{background:'#fff',borderRadius:10,padding:'12px',border:'1px solid #e2e8f0',boxShadow:'0 1px 3px rgba(0,0,0,.04)'}}>
               <div style={{fontWeight:700,fontSize:10,color:'#0d3b2e',marginBottom:10}}>Acquisition Progress</div>
@@ -1033,7 +1033,7 @@ function LandingDashboard() {
   return (
     <section style={{background:'#fff',padding:'80px 0'}}>
       <div style={{maxWidth:1180,margin:'0 auto',padding:'0 24px'}}>
-        <div style={{display:'grid',gridTemplateColumns:'1fr 2fr',gap:60,alignItems:'flex-start',marginBottom:48}}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center relative z-10">
           <div className="lp-fade-left">
             <div className="lp-pill" style={{marginBottom:16}}>
               <div style={{width:6,height:6,borderRadius:'50%',background:'#25a06e',animation:'lp-pulse-dot 1.5s ease-in-out infinite'}}/>
@@ -1047,7 +1047,7 @@ function LandingDashboard() {
             <p className="lp-section-sub" style={{marginBottom:24}}>
               Get complete visibility of your land acquisition projects with real-time data, interactive maps and actionable insights.
             </p>
-            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[
                 {v:'142',l:'Total Projects',ic:'layers',c:'#0d3b2e'},
                 {v:'68%',l:'Acquisition Progress',ic:'trending-up',c:'#25a06e'},
@@ -1093,7 +1093,7 @@ function LandingFeatures() {
           </div>
           <h2 className="lp-section-title">Powerful tools for smarter, faster<br/>and more transparent land acquisition.</h2>
         </div>
-        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:20}}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {feats.map((f,i)=>(
             <div key={i} className={`lp-card lp-fade-up lp-delay-${i%3+1}`} style={{padding:'28px 24px'}}>
               <div style={{width:48,height:48,borderRadius:12,background:'#f0fdf4',border:'1px solid #d1fae5',display:'flex',alignItems:'center',justifyContent:'center',marginBottom:16,transition:'all .2s'}}
@@ -1122,7 +1122,7 @@ function LandingWhy() {
   return (
     <section style={{background:'#fff',padding:'80px 0'}}>
       <div style={{maxWidth:1180,margin:'0 auto',padding:'0 24px'}}>
-        <div style={{display:'grid',gridTemplateColumns:'1fr 2fr',gap:60,alignItems:'flex-start'}}>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
           <div className="lp-fade-left">
             <div className="lp-pill" style={{marginBottom:16}}>
               <Icon name="help-circle" size={11} style={{color:'#1a6349'}}/>
@@ -1147,7 +1147,7 @@ function LandingWhy() {
               <div style={{fontSize:11,color:'#16a34a',fontWeight:500}}>Team CodeSmiths · Software Category</div>
             </div>
           </div>
-          <div className="lp-fade-right lp-delay-1" style={{display:'flex',flexDirection:'column',gap:16}}>
+          <div className="lg:col-span-2 lp-fade-right lp-delay-1" style={{display:'flex',flexDirection:'column',gap:16}}>
             {cards.map((c,i)=>(
               <div key={i} className="lp-why-card">
                 <div className="lp-why-icon">
@@ -1187,8 +1187,8 @@ function LandingCTA() {
       <div style={{position:'absolute',top:-80,left:'50%',transform:'translateX(-50%)',width:600,height:300,background:'radial-gradient(circle,rgba(52,211,153,.12),transparent 70%)',pointerEvents:'none'}}/>
 
       <div style={{maxWidth:1180,margin:'0 auto',padding:'0 24px',position:'relative',zIndex:1}}>
-        <div style={{display:'grid',gridTemplateColumns:'1fr auto',gap:48,alignItems:'center'}}>
-          <div className="lp-fade-left">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className="lp-fade-right" style={{position:'relative'}}>
             <div style={{display:'flex',alignItems:'center',gap:12,marginBottom:16}}>
               <div style={{width:42,height:42,borderRadius:10,background:'rgba(52,211,153,.15)',border:'1px solid rgba(52,211,153,.25)',display:'flex',alignItems:'center',justifyContent:'center'}}>
                 <Icon name="map-pin" size={20} style={{color:'#34d399'}}/>
