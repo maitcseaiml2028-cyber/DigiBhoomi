@@ -258,10 +258,10 @@ function Topbar({ crumbs=[], right=null, setMobileOpen }){
         ))}
       </div>
       {/* Mobile abbreviated crumbs */}
-      <div className="flex items-center sm:hidden text-sm font-medium text-slate-900">
-        {crumbs[crumbs.length - 1]?.label || 'DigiBhoomi'}
+      <div className="flex items-center sm:hidden text-sm font-medium text-slate-900 min-w-0 flex-1 px-1">
+        <span className="truncate">{crumbs[crumbs.length - 1]?.label || 'DigiBhoomi'}</span>
       </div>
-      <div className="flex-1"/>
+      <div className="hidden sm:block flex-1"/>
       <div className="relative hidden md:block">
         <Icon name="search" size={14} className="absolute left-3 top-2.5 text-slate-400"/>
         <input placeholder="Search projects, parcels, officers…"
