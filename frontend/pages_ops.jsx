@@ -87,7 +87,7 @@ function TaskDrawer({ task, onClose }){
     <Drawer open={!!task} onClose={onClose}
       title={task.title}
       subtitle={`${task.id} · ${task.projectId} · ${task.role}`}
-      width="w-[560px]"
+      width="w-full sm:w-[560px]"
       footer={<>
         <Button variant="ghost" onClick={onClose}>Close</Button>
         {task.status !== 'Approved' && <Button variant="secondary" icon="save" onClick={save}>Save progress</Button>}

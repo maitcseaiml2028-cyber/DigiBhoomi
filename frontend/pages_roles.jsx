@@ -44,7 +44,7 @@ const ROLE_ALLOWED_ROUTES = {
     '/ai/risk', '/ai/recommendations', '/tasks', '/approvals', '/reports',
   ],
   [ROLE_TYPES.FIELD]: ['/dashboard', '/gis', '/tasks', '/documents'],
-  [ROLE_TYPES.LANDOWNER]: ['/dashboard', '/documents'],
+  [ROLE_TYPES.LANDOWNER]: ['/dashboard', '/documents', '/gis', '/households', '/compensation'],
 };
 
 function canAccess(role, path) {
@@ -75,7 +75,7 @@ const ROLE_NAV = {
     },
     {
       section: 'LAND ACQUISITION', items: [
-        { to: '/projects', label: 'Acquisition', icon: 'land-plot' },
+        { to: '/projects?tab=acq', label: 'Acquisition', icon: 'land-plot' },
         { to: '/compensation', label: 'Compensation', icon: 'wallet' },
         { to: '/households', label: 'R&R Monitoring', icon: 'users' },
         { to: '/tasks', label: 'Possession', icon: 'check-circle-2' },
@@ -92,8 +92,8 @@ const ROLE_NAV = {
     },
     {
       section: 'ANALYTICS', items: [
-        { to: '/analytics', label: 'National Analytics', icon: 'bar-chart-3' },
-        { to: '/analytics', label: 'State Comparison', icon: 'map-pin' },
+        { to: '/analytics?tab=national', label: 'National Analytics', icon: 'bar-chart-3' },
+        { to: '/analytics?tab=state', label: 'State Comparison', icon: 'map-pin' },
         { to: '/reports', label: 'Reports', icon: 'file-bar-chart' },
       ]
     },
@@ -111,16 +111,16 @@ const ROLE_NAV = {
         { to: '/dashboard', label: 'Command Center', icon: 'layout-dashboard' },
         { to: '/projects', label: 'State Projects', icon: 'folder-kanban' },
         { to: '/gis', label: 'GIS Map', icon: 'map' },
-        { to: '/analytics', label: 'District Overview', icon: 'bar-chart-3' },
+        { to: '/analytics?tab=district', label: 'District Overview', icon: 'bar-chart-3' },
       ]
     },
     {
       section: 'ACQUISITION', items: [
-        { to: '/projects', label: 'Acquisition Progress', icon: 'land-plot' },
-        { to: '/households', label: 'Land Parcels', icon: 'map-pin' },
+        { to: '/projects?tab=acq', label: 'Acquisition Progress', icon: 'land-plot' },
+        { to: '/households?tab=parcels', label: 'Land Parcels', icon: 'map-pin' },
         { to: '/compensation', label: 'Compensation', icon: 'wallet' },
-        { to: '/households', label: 'R&R', icon: 'users' },
-        { to: '/tasks', label: 'Possession', icon: 'check-circle-2' },
+        { to: '/households?tab=rr', label: 'R&R', icon: 'users' },
+        { to: '/tasks?tab=poss', label: 'Possession', icon: 'check-circle-2' },
       ]
     },
     {
@@ -128,20 +128,20 @@ const ROLE_NAV = {
         { to: '/ai/risk', label: 'Risk & Delays', icon: 'brain-circuit', pill: 'AI' },
         { to: '/ai/recommendations', label: 'AI Recommendations', icon: 'lightbulb' },
         { to: '/ai/interventions', label: 'Intervention Center', icon: 'shield-alert' },
-        { to: '/approvals', label: 'Escalations', icon: 'alert-triangle' },
+        { to: '/approvals?tab=esc', label: 'Escalations', icon: 'alert-triangle' },
       ]
     },
     {
       section: 'OPERATIONS', items: [
-        { to: '/tasks', label: 'Tasks', icon: 'list-checks' },
-        { to: '/approvals', label: 'Approvals', icon: 'stamp' },
+        { to: '/tasks?tab=main', label: 'Tasks', icon: 'list-checks' },
+        { to: '/approvals?tab=main', label: 'Approvals', icon: 'stamp' },
         { to: '/households', label: 'Households', icon: 'users' },
         { to: '/documents', label: 'Documents', icon: 'file-check-2' },
       ]
     },
     {
       section: 'ANALYTICS', items: [
-        { to: '/analytics', label: 'State Analytics', icon: 'bar-chart-3' },
+        { to: '/analytics?tab=state', label: 'State Analytics', icon: 'bar-chart-3' },
         { to: '/reports', label: 'Reports', icon: 'file-bar-chart' },
       ]
     },
@@ -281,15 +281,15 @@ const ROLE_NAV = {
         { to: '/dashboard', label: 'My Dashboard', icon: 'layout-dashboard' },
         { to: '/documents?tab=parcels', label: 'My Land Parcels', icon: 'map-pin' },
         { to: '/gis', label: 'GIS Location', icon: 'map' },
-        { to: '/dashboard', label: 'Acquisition Status', icon: 'activity' },
+        { to: '/dashboard?tab=status', label: 'Acquisition Status', icon: 'activity' },
       ]
     },
     {
       section: 'MY ACQUISITION', items: [
         { to: '/dashboard?tab=notifs', label: 'Notifications', icon: 'bell' },
-        { to: '/dashboard', label: 'Survey & Verification', icon: 'clipboard-check' },
+        { to: '/dashboard?tab=survey', label: 'Survey & Verification', icon: 'clipboard-check' },
         { to: '/documents?tab=award', label: 'Award Details', icon: 'award' },
-        { to: '/dashboard', label: 'Possession Status', icon: 'check-circle-2' },
+        { to: '/dashboard?tab=poss', label: 'Possession Status', icon: 'check-circle-2' },
       ]
     },
     {
@@ -616,22 +616,22 @@ function MinistryDashboard() {
         </div>
 
         <div className="relative z-10 grid grid-cols-2 gap-3 w-full md:w-auto">
-          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-[230px]">
+          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-0 w-full">
             <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">Total Projects</div>
             <div className="text-2xl font-bold text-slate-900">{projects.length || k.total || 78}</div>
             <div className="text-[10px] text-slate-500 mt-0.5">across {new Set(projects.map(p => p.state).filter(Boolean)).size || 12} states</div>
           </div>
-          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-[230px]">
+          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-0 w-full">
             <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">Active</div>
             <div className="text-2xl font-bold text-slate-900">{projects.length || k.total || 78}</div>
             <div className="text-[10px] text-slate-500 mt-0.5">100% of portfolio</div>
           </div>
-          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-[230px]">
+          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-0 w-full">
             <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">High Risk</div>
             <div className="text-2xl font-bold text-[#ea580c]">{projects.filter(p=>p.riskLevel==='high').length || 38}</div>
             <div className="text-[10px] text-slate-500 mt-0.5">need attention</div>
           </div>
-          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-[230px]">
+          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-0 w-full">
             <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">Critical</div>
             <div className="text-2xl font-bold text-[#dc2626]">{critical.length || 27}</div>
             <div className="text-[10px] text-slate-500 mt-0.5">red-flag list</div>
@@ -976,22 +976,22 @@ function StateDashboard() {
         </div>
 
         <div className="relative z-10 grid grid-cols-2 gap-3 w-full md:w-auto">
-          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-[230px]">
+          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-0 w-full">
             <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">State Projects</div>
             <div className="text-2xl font-bold text-slate-900">{stP.length || 15}</div>
             <div className="text-[10px] text-slate-500 mt-0.5">across {userState}</div>
           </div>
-          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-[230px]">
+          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-0 w-full">
             <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">Active</div>
             <div className="text-2xl font-bold text-slate-900">{stP.length || 15}</div>
             <div className="text-[10px] text-slate-500 mt-0.5">100% of portfolio</div>
           </div>
-          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-[230px]">
+          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-0 w-full">
             <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">High Risk</div>
             <div className="text-2xl font-bold text-[#ea580c]">{stP.filter(p=>p.riskLevel==='high').length || 4}</div>
             <div className="text-[10px] text-slate-500 mt-0.5">need attention</div>
           </div>
-          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-[230px]">
+          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-0 w-full">
             <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">Critical</div>
             <div className="text-2xl font-bold text-[#dc2626]">{stP.filter(p=>p.riskLevel==='critical').length || 2}</div>
             <div className="text-[10px] text-slate-500 mt-0.5">red-flag list</div>
@@ -1169,22 +1169,22 @@ function DistrictDashboard() {
         </div>
 
         <div className="relative z-10 grid grid-cols-2 gap-3 w-full md:w-auto">
-          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-[230px]">
+          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-0 w-full">
             <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">District Projects</div>
             <div className="text-2xl font-bold text-slate-900">{myP.length || 8}</div>
             <div className="text-[10px] text-slate-500 mt-0.5">across {userDistrict}</div>
           </div>
-          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-[230px]">
+          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-0 w-full">
             <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">Active</div>
             <div className="text-2xl font-bold text-slate-900">{myP.length || 8}</div>
             <div className="text-[10px] text-slate-500 mt-0.5">100% of portfolio</div>
           </div>
-          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-[230px]">
+          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-0 w-full">
             <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">High Risk</div>
             <div className="text-2xl font-bold text-[#ea580c]">{myP.filter(p=>p.riskLevel==='high').length || 2}</div>
             <div className="text-[10px] text-slate-500 mt-0.5">need attention</div>
           </div>
-          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-[230px]">
+          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-0 w-full">
             <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">Critical</div>
             <div className="text-2xl font-bold text-[#dc2626]">{myP.filter(p=>p.riskLevel==='critical').length || 1}</div>
             <div className="text-[10px] text-slate-500 mt-0.5">red-flag list</div>
@@ -1391,22 +1391,22 @@ function ProjectAgencyDashboard() {
         </div>
 
         <div className="relative z-10 grid grid-cols-2 gap-3 w-full md:w-auto">
-          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-[230px]">
+          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-0 w-full">
             <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">Assigned Projects</div>
             <div className="text-2xl font-bold text-slate-900">{projects.length || 3}</div>
             <div className="text-[10px] text-slate-500 mt-0.5">your portfolio</div>
           </div>
-          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-[230px]">
+          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-0 w-full">
             <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">Active</div>
             <div className="text-2xl font-bold text-slate-900">{projects.length || 3}</div>
             <div className="text-[10px] text-slate-500 mt-0.5">100% of portfolio</div>
           </div>
-          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-[230px]">
+          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-0 w-full">
             <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">High Risk</div>
             <div className="text-2xl font-bold text-[#ea580c]">{projects.filter(p=>p.riskLevel==='high').length || 1}</div>
             <div className="text-[10px] text-slate-500 mt-0.5">need attention</div>
           </div>
-          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-[230px]">
+          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-0 w-full">
             <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">Critical</div>
             <div className="text-2xl font-bold text-[#dc2626]">{projects.filter(p=>p.riskLevel==='critical').length || 1}</div>
             <div className="text-[10px] text-slate-500 mt-0.5">red-flag list</div>
@@ -1592,22 +1592,22 @@ function FieldOfficerDashboard() {
         </div>
 
         <div className="relative z-10 grid grid-cols-2 gap-3 w-full md:w-auto">
-          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-[230px]">
+          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-0 w-full">
             <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">Visits Today</div>
             <div className="text-2xl font-bold text-slate-900">{visits.length}</div>
             <div className="text-[10px] text-slate-500 mt-0.5">scheduled</div>
           </div>
-          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-[230px]">
+          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-0 w-full">
             <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">Completed</div>
             <div className="text-2xl font-bold text-emerald-600">{visits.filter(v=>v.status==='Completed').length}</div>
             <div className="text-[10px] text-slate-500 mt-0.5">inspections</div>
           </div>
-          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-[230px]">
+          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-0 w-full">
             <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">Pending</div>
             <div className="text-2xl font-bold text-[#ea580c]">{visits.filter(v=>v.status==='Pending').length}</div>
             <div className="text-[10px] text-slate-500 mt-0.5">to be visited</div>
           </div>
-          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-[230px]">
+          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-0 w-full">
             <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">Sync Pending</div>
             <div className="text-2xl font-bold text-[#dc2626]">4</div>
             <div className="text-[10px] text-slate-500 mt-0.5">offline records</div>
@@ -1794,22 +1794,22 @@ function LandownerDashboard() {
         </div>
 
         <div className="relative z-10 grid grid-cols-2 gap-3 w-full md:w-auto">
-          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-[230px]">
+          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-0 w-full">
             <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">Land Parcels</div>
             <div className="text-2xl font-bold text-slate-900">1</div>
             <div className="text-[10px] text-slate-500 mt-0.5">{lo.landArea || 1.24} {lo.landUnit || 'Hectares'}</div>
           </div>
-          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-[230px]">
+          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-0 w-full">
             <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">Compensation</div>
             <div className="text-2xl font-bold text-emerald-600">₹48L</div>
             <div className="text-[10px] text-slate-500 mt-0.5">approved</div>
           </div>
-          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-[230px]">
+          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-0 w-full">
             <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">Status</div>
             <div className="text-2xl font-bold text-[#ea580c]">In Progress</div>
             <div className="text-[10px] text-slate-500 mt-0.5">awaiting possession</div>
           </div>
-          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-[230px]">
+          <div className="bg-[#F5EFE6]/80 backdrop-blur-sm border border-brand-500/10 rounded-xl px-4 py-2.5 min-w-0 w-full">
             <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">Grievances</div>
             <div className="text-2xl font-bold text-[#dc2626]">{grievances.length || 0}</div>
             <div className="text-[10px] text-slate-500 mt-0.5">active issues</div>

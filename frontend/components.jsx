@@ -137,6 +137,16 @@ function Sidebar({ mobileOpen, setMobileOpen }){
     nav('/login');
   };
 
+  const navRef = useRef(null);
+  useEffect(() => {
+    const saved = sessionStorage.getItem('bs.sidebar.scroll');
+    if (saved && navRef.current) navRef.current.scrollTop = Number(saved);
+    const handleScroll = (e) => sessionStorage.setItem('bs.sidebar.scroll', e.target.scrollTop);
+    const el = navRef.current;
+    if (el) el.addEventListener('scroll', handleScroll);
+    return () => { if (el) el.removeEventListener('scroll', handleScroll); };
+  }, []);
+
   return (
     <>
     {/* Mobile backdrop */}
@@ -156,7 +166,7 @@ function Sidebar({ mobileOpen, setMobileOpen }){
         )}
       </div>
 
-      <nav className="flex-1 min-h-0 overflow-y-auto sb-scroll py-3">
+      <nav ref={navRef} className="flex-1 min-h-0 overflow-y-auto sb-scroll py-3">
         {getNavForRole().map(g => (
           <div key={g.section} className="px-3 mb-4">
             {!collapsed && <div className="text-[10px] tracking-[0.15em] text-slate-400 font-semibold px-3 mb-1.5">{g.section}</div>}
@@ -331,7 +341,7 @@ function Modal({ open, onClose, title, subtitle, children, footer, size='md' }){
   );
 }
 
-function Drawer({ open, onClose, title, subtitle, width='w-[520px]', children, footer }){
+function Drawer({ open, onClose, title, subtitle, width='w-full sm:w-[520px]', children, footer }){
   useLucide();
   return (
     <div className={`fixed inset-0 z-40 pointer-events-none ${open?'':''}`}>

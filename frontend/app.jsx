@@ -58,7 +58,7 @@ function RequireAuth({ children }) {
     );
   }
   if (!ready) return <LoadingScreen />;
-  return children;
+  return React.cloneElement(children, { key: location.pathname + location.search });
 }
 
 // Safety net: if any page throws while rendering, show a recoverable error
