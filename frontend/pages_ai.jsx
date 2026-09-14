@@ -72,8 +72,6 @@ function AIRiskDashboard(){
             <div className="mt-6 flex items-center gap-2 flex-wrap">
               <Button variant="primary" icon="sparkles" onClick={()=>nav('/ai/explainable?project='+pid)}>Explain risk</Button>
               <Button variant="dark" icon="lightbulb" onClick={()=>nav('/ai/recommendations?project='+pid)}>Recommendations</Button>
-              <Button variant="secondary" icon="sliders-horizontal" onClick={()=>nav('/ai/simulator?project='+pid)}>Simulate</Button>
-              <Button variant="secondary" icon="shield-alert" onClick={()=>nav('/ai/interventions?project='+pid)}>Interventions</Button>
             </div>
           </div>
         </Card>
@@ -516,7 +514,6 @@ function InterventionCenter(){
             <div className="mt-3"><Progress value={p.progress} tone={p.riskLevel} showLabel/></div>
             <div className="mt-3 pt-3 border-t hairline flex items-center gap-2">
               <Button size="sm" variant="secondary" icon="lightbulb" onClick={(e)=>{e.stopPropagation(); nav('/ai/recommendations?project='+p.id);}}>Recs</Button>
-              <Button size="sm" variant="secondary" icon="sliders-horizontal" onClick={(e)=>{e.stopPropagation(); nav('/ai/simulator?project='+p.id);}}>Simulate</Button>
               <div className="ml-auto text-[11px] text-slate-500">Owner · {p.owner.split(' ')[0]}</div>
             </div>
           </Card>

@@ -82,7 +82,7 @@ const ROLE_NAV = {
       ]
     },
     {
-      section: 'DECISION SUPPORT', items: [
+      section: 'INTELLIGENCE SUPPORT', items: [
         { to: '/ai/risk', label: 'Risk & Delays', icon: 'brain-circuit', pill: 'AI' },
         { to: '/ai/explainable', label: 'Explainable AI', icon: 'sparkles', pill: 'AI' },
         { to: '/ai/recommendations', label: 'Recommendations', icon: 'lightbulb' },
@@ -124,7 +124,7 @@ const ROLE_NAV = {
       ]
     },
     {
-      section: 'MONITORING', items: [
+      section: 'INTELLIGENCE SUPPORT', items: [
         { to: '/ai/risk', label: 'Risk & Delays', icon: 'brain-circuit', pill: 'AI' },
         { to: '/ai/recommendations', label: 'AI Recommendations', icon: 'lightbulb' },
         { to: '/ai/interventions', label: 'Intervention Center', icon: 'shield-alert' },
@@ -216,7 +216,7 @@ const ROLE_NAV = {
       ]
     },
     {
-      section: 'PROJECT INTELLIGENCE', items: [
+      section: 'INTELLIGENCE SUPPORT', items: [
         { to: '/ai/risk', label: 'Project Risk', icon: 'brain-circuit', pill: 'AI' },
         { to: '/ai/recommendations', label: 'AI Recommendations', icon: 'lightbulb' },
         { to: '/projects?tab=time', label: 'Project Timeline', icon: 'calendar' },

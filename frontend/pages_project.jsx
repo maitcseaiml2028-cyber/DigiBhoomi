@@ -88,7 +88,6 @@ function ProjectDetail(){
             <div className="mt-4 flex flex-wrap gap-2">
               <Button size="sm" variant="dark" icon="sparkles" onClick={()=>nav('/ai/explainable?project='+p.id)}>Explain risk</Button>
               <Button size="sm" variant="secondary" icon="lightbulb" onClick={()=>nav('/ai/recommendations?project='+p.id)}>Recommendations</Button>
-              <Button size="sm" variant="secondary" icon="sliders-horizontal" onClick={()=>nav('/ai/simulator?project='+p.id)}>Simulate</Button>
             </div>
           </div>
         </div>
