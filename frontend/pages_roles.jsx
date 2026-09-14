@@ -32,7 +32,7 @@ const ROLE_ALLOWED_ROUTES = {
   [ROLE_TYPES.MINISTRY]: ['*'],
   [ROLE_TYPES.STATE]: [
     '/dashboard', '/projects', '/gis', '/households', '/documents', '/compensation',
-    '/ai/risk', '/ai/recommendations', '/ai/interventions', '/tasks', '/approvals',
+    '/ai/risk', '/ai/explainable', '/ai/recommendations', '/ai/interventions', '/tasks', '/approvals',
     '/analytics', '/reports',
   ],
   [ROLE_TYPES.DISTRICT]: [
@@ -41,7 +41,7 @@ const ROLE_ALLOWED_ROUTES = {
   ],
   [ROLE_TYPES.PROJECT]: [
     '/dashboard', '/projects', '/gis', '/households', '/documents', '/compensation',
-    '/ai/risk', '/ai/recommendations', '/tasks', '/approvals', '/reports',
+    '/ai/risk', '/ai/explainable', '/ai/recommendations', '/tasks', '/approvals', '/reports',
   ],
   [ROLE_TYPES.FIELD]: ['/dashboard', '/gis', '/tasks', '/documents'],
   [ROLE_TYPES.LANDOWNER]: ['/dashboard', '/documents', '/gis', '/households', '/compensation'],

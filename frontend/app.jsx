@@ -31,6 +31,11 @@ function RequireAuth({ children }) {
   const [error, setError] = React.useState(null);
   const location = window.ReactRouterDOM ? window.ReactRouterDOM.useLocation() : {pathname:'/'};
 
+  React.useEffect(() => {
+    if (window.BS_DATA) { setReady(true); return; }
+    ensureBooted().then(() => setReady(true)).catch((e) => setError(e.message));
+  }, []);
+
   if (!getToken() || !window.BS_STATE.user) {
     return <Navigate to="/login" replace />;
   }
@@ -43,11 +48,6 @@ function RequireAuth({ children }) {
       return <Navigate to="/dashboard" replace />;
     }
   }
-
-  React.useEffect(() => {
-    if (window.BS_DATA) { setReady(true); return; }
-    ensureBooted().then(() => setReady(true)).catch((e) => setError(e.message));
-  }, []);
 
   if (error) {
     return (

@@ -13,14 +13,14 @@ const LandingStyles = () => {
     s.id = id;
     s.textContent = `
       :root {
-        --g900: #0d3b2e;
-        --g800: #134e3a;
-        --g700: #1a6349;
-        --g600: #1d7a59;
-        --g500: #25a06e;
-        --g400: #34d399;
-        --g100: #d1fae5;
-        --g50:  #f0fdf4;
+        --g900: #7c2d12;
+        --g800: #9a3412;
+        --g700: #c2410c;
+        --g600: #ea580c;
+        --g500: #f97316;
+        --g400: #fb923c;
+        --g100: #ffedd5;
+        --g50:  #fff7ed;
         --slate900: #0f172a;
         --slate700: #334155;
         --slate500: #64748b;
@@ -78,7 +78,7 @@ const LandingStyles = () => {
 
       /* Hero bg — Indian fields gradient */
       .lp-hero-bg {
-        background: linear-gradient(160deg,#e8f5e9 0%,#c8e6c9 30%,#a5d6a7 60%,#81c784 80%,#66bb6a 100%);
+        background: linear-gradient(160deg,#fff7ed 0%,#ffedd5 30%,#fed7aa 60%,#fdba74 80%,#fb923c 100%);
         position:relative;
         overflow:hidden;
       }
@@ -189,7 +189,7 @@ const LandingStyles = () => {
         border:1px solid rgba(0,0,0,.06);
       }
       .lp-dash-sidebar {
-        background:#0d3b2e;
+        background:var(--g900);
         width:160px;
         flex-shrink:0;
         display:flex;
@@ -209,7 +209,7 @@ const LandingStyles = () => {
         margin:1px 6px;
       }
       .lp-dash-sidenav-item:hover { background:rgba(255,255,255,.1); color:#fff; }
-      .lp-dash-sidenav-item.active { background:rgba(52,211,153,.15); color:#34d399; }
+      .lp-dash-sidenav-item.active { background:rgba(251,146,60,.18); color:#fb923c; }
 
       /* Leaflet hero map tweaks */
       .lp-hero-map .leaflet-container {
@@ -225,7 +225,7 @@ const LandingStyles = () => {
       /* Process step */
       .lp-step-circle {
         width:52px;height:52px;border-radius:50%;
-        background:#e8f5e9;border:2px solid var(--g400);
+        background:#fff7ed;border:2px solid var(--g400);
         display:flex;align-items:center;justify-content:center;
         color:var(--g700);
         transition:all .2s;
@@ -246,7 +246,7 @@ const LandingStyles = () => {
 
       /* CTA banner */
       .lp-cta-banner {
-        background: linear-gradient(135deg,#0d3b2e 0%,#134e3a 50%,#0d3b2e 100%);
+        background: linear-gradient(135deg,#7c2d12 0%,#9a3412 50%,#7c2d12 100%);
         position:relative;overflow:hidden;
       }
       .lp-cta-banner::before {
@@ -375,15 +375,15 @@ function LandingNav() {
       <div style={{maxWidth:1180,margin:'0 auto',padding:'0 24px',height:60,display:'flex',alignItems:'center',justifyContent:'space-between'}}>
         {/* Logo */}
         <div style={{display:'flex',alignItems:'center',gap:9,cursor:'pointer'}} onClick={()=>nav('/')}>
-          <div style={{width:34,height:34,borderRadius:9,background:'linear-gradient(135deg,#1a6349,#0d3b2e)',display:'flex',alignItems:'center',justifyContent:'center',boxShadow:'0 3px 10px rgba(26,99,73,.3)'}}>
+          <div style={{width:34,height:34,borderRadius:9,background:'linear-gradient(135deg,#c2410c,#7c2d12)',display:'flex',alignItems:'center',justifyContent:'center',boxShadow:'0 3px 10px rgba(194,65,12,.3)'}}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="rgba(255,255,255,.2)"/>
               <path d="M12 4c-1.5 2.5-3 5-3 8h6c0-3-1.5-5.5-3-8z" fill="#4ade80"/>
-              <path d="M9 12c0 2.5 1 5 3 6 2-1 3-3.5 3-6H9z" fill="#86efac"/>
+              <path d="M9 12c0 2.5 1 5 3 6 2-1 3-3.5 3-6H9z" fill="#fdba74"/>
               <path d="M12 10l-2 4h4l-2-4z" fill="#fff" opacity=".6"/>
             </svg>
           </div>
-          <span style={{fontWeight:800,fontSize:17,color:'#0d3b2e',letterSpacing:'-.3px'}}>DigiBhoomi</span>
+          <span style={{fontWeight:800,fontSize:17,color:'#7c2d12',letterSpacing:'-.3px'}}>DigiBhoomi</span>
         </div>
 
         <nav className="hidden md:flex items-center gap-8">
@@ -398,9 +398,9 @@ function LandingNav() {
 
         {/* Login */}
         <button onClick={()=>nav('/login')}
-          style={{background:'#0d3b2e',color:'#fff',border:'none',borderRadius:8,padding:'8px 20px',fontSize:13,fontWeight:700,cursor:'pointer',display:'flex',alignItems:'center',gap:7,boxShadow:'0 3px 10px rgba(13,59,46,.3)',transition:'all .2s'}}
-          onMouseEnter={e=>{e.currentTarget.style.background='#134e3a';e.currentTarget.style.transform='translateY(-1px)';}}
-          onMouseLeave={e=>{e.currentTarget.style.background='#0d3b2e';e.currentTarget.style.transform='none';}}
+          style={{background:'#c2410c',color:'#fff',border:'none',borderRadius:8,padding:'8px 20px',fontSize:13,fontWeight:700,cursor:'pointer',display:'flex',alignItems:'center',gap:7,boxShadow:'0 3px 10px rgba(194,65,12,.3)',transition:'all .2s'}}
+          onMouseEnter={e=>{e.currentTarget.style.background='#9a3412';e.currentTarget.style.transform='translateY(-1px)';}}
+          onMouseLeave={e=>{e.currentTarget.style.background='#c2410c';e.currentTarget.style.transform='none';}}
         >
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
           Login
@@ -492,8 +492,8 @@ function LandingHero() {
       {/* Background SVG landscape */}
       <div style={{position:'absolute',bottom:0,left:0,right:0,height:220,opacity:.18,pointerEvents:'none',overflow:'hidden'}}>
         <svg viewBox="0 0 1440 220" fill="none" xmlns="http://www.w3.org/2000/svg" style={{width:'100%',height:'100%'}}>
-          <path d="M0 180 Q200 120 400 160 Q600 200 800 140 Q1000 80 1200 130 Q1350 165 1440 120 L1440 220 L0 220Z" fill="#1a6349" opacity=".3"/>
-          <path d="M0 200 Q300 160 600 185 Q900 210 1440 170 L1440 220 L0 220Z" fill="#0d3b2e" opacity=".4"/>
+          <path d="M0 180 Q200 120 400 160 Q600 200 800 140 Q1000 80 1200 130 Q1350 165 1440 120 L1440 220 L0 220Z" fill="#c2410c" opacity=".3"/>
+          <path d="M0 200 Q300 160 600 185 Q900 210 1440 170 L1440 220 L0 220Z" fill="#7c2d12" opacity=".4"/>
         </svg>
       </div>
 
@@ -503,12 +503,12 @@ function LandingHero() {
           {/* LEFT */}
           <div>
             <div className="lp-pill lp-fade-up" style={{marginBottom:20}}>
-              <div style={{width:6,height:6,borderRadius:'50%',background:'#25a06e',animation:'lp-pulse-dot 1.5s infinite'}}/>
+              <div style={{width:6,height:6,borderRadius:'50%',background:'#f97316',animation:'lp-pulse-dot 1.5s infinite'}}/>
               Smarter Land Management · A Stronger Tomorrow
             </div>
-            <h1 className="lp-fade-up lp-delay-1" style={{fontSize:'clamp(28px,3.5vw,46px)',fontWeight:900,color:'#0d3b2e',lineHeight:1.08,letterSpacing:'-1.5px',marginBottom:18}}>
+            <h1 className="lp-fade-up lp-delay-1" style={{fontSize:'clamp(28px,3.5vw,46px)',fontWeight:900,color:'#7c2d12',lineHeight:1.08,letterSpacing:'-1.5px',marginBottom:18}}>
               ONE PLATFORM.<br/>
-              <span style={{color:'#1a6349'}}>COMPLETE LAND</span><br/>
+              <span style={{color:'#c2410c'}}>COMPLETE LAND</span><br/>
               ACQUISITION VISIBILITY.
             </h1>
             <p className="lp-fade-up lp-delay-2" style={{fontSize:15,color:'#334155',lineHeight:1.7,marginBottom:28,maxWidth:460}}>
@@ -533,13 +533,13 @@ function LandingHero() {
             <div className="lp-fade-up lp-delay-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
               {stats.map((s,i)=>(
                 <div key={i} style={{display:'flex',alignItems:'center',gap:10,padding:'10px 14px',background:'rgba(255,255,255,.85)',borderRadius:10,border:'1px solid rgba(0,0,0,.07)',backdropFilter:'blur(8px)'}}>
-                  <div style={{width:34,height:34,borderRadius:8,background:'#e8f5e9',border:'1px solid #c8e6c9',display:'flex',alignItems:'center',justifyContent:'center'}}>
-                    <Icon name={s.icon} size={15} style={{color:'#1a6349'}}/>
+                    <div style={{width:34,height:34,borderRadius:8,background:'#fff7ed',border:'1px solid #fed7aa',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                    <Icon name={s.icon} size={15} style={{color:'#c2410c'}}/>
                   </div>
                   <div style={{flex:1,minWidth:0}}>
                     <div style={{display:'flex',alignItems:'baseline',gap:6}}>
-                      <span style={{fontWeight:800,fontSize:18,color:'#0d3b2e',letterSpacing:'-.5px'}}>{s.val}</span>
-                      <span style={{fontSize:10,fontWeight:700,color:s.up?'#25a06e':'#ef4444'}}>{s.delta}</span>
+                      <span style={{fontWeight:800,fontSize:18,color:'#7c2d12',letterSpacing:'-.5px'}}>{s.val}</span>
+                      <span style={{fontSize:10,fontWeight:700,color:s.up?'#f97316':'#ef4444'}}>{s.delta}</span>
                     </div>
                     <div style={{fontSize:10,color:'#64748b',fontWeight:500}}>{s.label}</div>
                   </div>
@@ -553,20 +553,20 @@ function LandingHero() {
             <div style={{background:'#fff',borderRadius:16,boxShadow:'0 20px 60px rgba(0,0,0,.15)',overflow:'hidden',border:'1px solid rgba(0,0,0,.07)'}}>
               {/* Dashboard topbar */}
               <div style={{display:'flex',alignItems:'center',gap:10,padding:'10px 14px',borderBottom:'1px solid #f1f5f9',background:'#fff'}}>
-                <div style={{width:26,height:26,borderRadius:6,background:'linear-gradient(135deg,#1a6349,#0d3b2e)',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                <div style={{width:26,height:26,borderRadius:6,background:'linear-gradient(135deg,#c2410c,#7c2d12)',display:'flex',alignItems:'center',justifyContent:'center'}}>
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="rgba(255,255,255,.2)"/><path d="M12 4c-1.5 2.5-3 5-3 8h6c0-3-1.5-5.5-3-8z" fill="#4ade80"/></svg>
                 </div>
-                <span style={{fontWeight:700,fontSize:12,color:'#0d3b2e'}}>DigiBhoomi</span>
+                <span style={{fontWeight:700,fontSize:12,color:'#7c2d12'}}>DigiBhoomi</span>
                 <div style={{flex:1,background:'#f8fafc',borderRadius:6,padding:'4px 10px',fontSize:10,color:'#94a3b8',border:'1px solid #e2e8f0',marginLeft:4}}>
                   Search projects, locations, parcels...
                 </div>
-                <div style={{width:26,height:26,borderRadius:'50%',background:'#e8f5e9',display:'flex',alignItems:'center',justifyContent:'center'}}>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1a6349" strokeWidth="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                <div style={{width:26,height:26,borderRadius:'50%',background:'#fff7ed',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#c2410c" strokeWidth="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
                 </div>
               </div>
               <div style={{display:'flex',height:320,width:'100%'}}>
                 {/* Sidebar */}
-                <div className="hidden sm:block" style={{width:130,background:'#0d3b2e',flexShrink:0,padding:'8px 0'}}>
+                <div className="hidden sm:block" style={{width:130,background:'#7c2d12',flexShrink:0,padding:'8px 0'}}>
                   <div style={{padding:'6px 10px',marginBottom:6}}>
                     <div style={{fontSize:9,color:'rgba(255,255,255,.4)',letterSpacing:'1px',textTransform:'uppercase',marginBottom:6}}>Menu</div>
                   </div>
@@ -581,7 +581,7 @@ function LandingHero() {
                     ['bar-chart-2','Analytics',false],
                     ['file-text','Documents',false],
                   ].map(([ic,label,active],i)=>(
-                    <div key={i} className="lp-dash-sidenav-item" style={active?{background:'rgba(52,211,153,.15)',color:'#34d399'}:{}}>
+                    <div key={i} className="lp-dash-sidenav-item" style={active?{background:'rgba(251,146,60,.18)',color:'#fb923c'}:{}}>
                       <Icon name={ic} size={12} style={{flexShrink:0}}/>
                       <span>{label}</span>
                     </div>
@@ -719,13 +719,13 @@ function LandingChallenge() {
             </div>
             <h2 className="lp-section-title" style={{marginBottom:0}}>
               Land Acquisition Is Complex.{' '}
-              <span style={{color:'#1a6349'}}>Monitoring Shouldn't Be.</span>
+              <span style={{color:'#c2410c'}}>Monitoring Shouldn't Be.</span>
             </h2>
           </div>
           <div className="lp-fade-right">
             <p className="lp-section-sub">
               Multiple systems, fragmented data and manual processes make land acquisition slow, complex and opaque.
-              DigiBhoomi brings everything <strong style={{color:'#1a6349'}}>together</strong>.
+              DigiBhoomi brings everything <strong style={{color:'#c2410c'}}>together</strong>.
             </p>
           </div>
         </div>
@@ -733,8 +733,8 @@ function LandingChallenge() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {cards.map((c,i)=>(
             <div key={i} className={`lp-card lp-card-green lp-fade-up lp-delay-${i+1}`} style={{padding:'24px 20px'}}>
-              <div className="lp-feat-icon" style={{width:42,height:42,borderRadius:10,background:'#f0fdf4',border:'1px solid #d1fae5',display:'flex',alignItems:'center',justifyContent:'center',marginBottom:14}}>
-                <Icon name={c.icon} size={19} style={{color:'#1a6349'}}/>
+              <div className="lp-feat-icon" style={{width:42,height:42,borderRadius:10,background:'#fff7ed',border:'1px solid #ffedd5',display:'flex',alignItems:'center',justifyContent:'center',marginBottom:14}}>
+                <Icon name={c.icon} size={19} style={{color:'#c2410c'}}/>
               </div>
               <div style={{fontWeight:700,fontSize:14,color:'#0d3b2e',marginBottom:8}}>{c.title}</div>
               <div style={{fontSize:12,color:'#64748b',lineHeight:1.65}}>{c.text}</div>
@@ -775,9 +775,9 @@ function LandingLifecycle() {
             {steps.map((s,i)=>(
               <React.Fragment key={i}>
                 <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:12,width:100}}>
-                  <div className="lp-step-circle" style={{width:54,height:54,borderRadius:'50%',background:'#e8f5e9',border:'2px solid #86efac',display:'flex',alignItems:'center',justifyContent:'center',color:'#1a6349',cursor:'default',transition:'all .2s'}}
-                    onMouseEnter={e=>{e.currentTarget.style.background='#1a6349';e.currentTarget.style.color='#fff';e.currentTarget.style.borderColor='#1a6349';e.currentTarget.style.transform='translateY(-4px)';e.currentTarget.style.boxShadow='0 8px 20px rgba(26,99,73,.25)';}}
-                    onMouseLeave={e=>{e.currentTarget.style.background='#e8f5e9';e.currentTarget.style.color='#1a6349';e.currentTarget.style.borderColor='#86efac';e.currentTarget.style.transform='none';e.currentTarget.style.boxShadow='none';}}
+                  <div className="lp-step-circle" style={{width:54,height:54,borderRadius:'50%',background:'#fff7ed',border:'2px solid #fdba74',display:'flex',alignItems:'center',justifyContent:'center',color:'#c2410c',cursor:'default',transition:'all .2s'}}
+                    onMouseEnter={e=>{e.currentTarget.style.background='#c2410c';e.currentTarget.style.color='#fff';e.currentTarget.style.borderColor='#c2410c';e.currentTarget.style.transform='translateY(-4px)';e.currentTarget.style.boxShadow='0 8px 20px rgba(194,65,12,.25)';}}
+                    onMouseLeave={e=>{e.currentTarget.style.background='#fff7ed';e.currentTarget.style.color='#c2410c';e.currentTarget.style.borderColor='#fdba74';e.currentTarget.style.transform='none';e.currentTarget.style.boxShadow='none';}}
                   >
                     <Icon name={s.icon} size={22}/>
                   </div>
@@ -786,8 +786,8 @@ function LandingLifecycle() {
                 {i < steps.length-1 && (
                   <div style={{display:'flex',alignItems:'center',marginTop:16,paddingBottom:20,width:32,flexShrink:0}}>
                     <svg width="28" height="16" viewBox="0 0 28 16" fill="none">
-                      <path d="M2 8 H22" stroke="#86efac" strokeWidth="2" strokeDasharray="3 2"/>
-                      <path d="M18 4 L26 8 L18 12" stroke="#1a6349" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M2 8 H22" stroke="#fdba74" strokeWidth="2" strokeDasharray="3 2"/>
+                      <path d="M18 4 L26 8 L18 12" stroke="#c2410c" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </div>
                 )}
